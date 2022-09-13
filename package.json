@@ -10,7 +10,6 @@
     "express": "^4.18.1",
     "nodemon": "^2.0.19",
     "simple-peer": "^9.11.1",
-    "simple-peer-server": "^0.0.11",
     "simple-peer-wrapper": "^0.0.5"
   },
   "scripts": {

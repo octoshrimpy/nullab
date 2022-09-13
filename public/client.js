@@ -4,18 +4,22 @@
   var peer       = null
   var c_in       = null
   var c_out      = null
+
+  var selfIdStr = null
   
-  var comms   = document.getElementById('comms-group')
-  var selfId  = document.getElementById('selfId')
-  var otherId = document.getElementById('otherId')
-  var msg     = document.getElementById('msg')
-  var send    = document.getElementById('send')
-  var status  = document.getElementById('status')
-  var convo   = document.getElementById('convo')
-  var connect = document.getElementById('connect')
+  var comms    = document.getElementById('comms-group')
+  var selfId   = document.getElementById('selfId')
+  var otherId  = document.getElementById('otherId')
+  var msg      = document.getElementById('msg')
+  var send     = document.getElementById('send')
+  var status   = document.getElementById('status')
+  var convo    = document.getElementById('convo')
+  var connect  = document.getElementById('connect')
+  var selfSave = document.getElementById('selfSave')
+
 
   function initialize() {
-    peer = new Peer(null, {
+    peer = new Peer(selfIdStr, {
       host: 'peer.octoshrimpy.dev',
       port: location.protocol === 'https:' ? 443 : 80,
       path: '/myapp',
@@ -23,6 +27,7 @@
     })
     
     peer.on('open', (id) => {
+      console.log(peer)
       if (peer.id === null) {
         console.log('received null id from peer open')
         peer.id = lastPeerId
@@ -38,12 +43,18 @@
 
     // other client can send
     peer.on('connection', conn => {
-
       c_in = conn
 
       c_in.on('open', () => {
         status.innerHTML = 'connected'
         comms.style.display = 'block'
+
+        // connect right back
+        if (c_in && c_out) {
+          return
+        }
+
+        join.call({connectTo: c_in.peer})
       })
 
       c_in.on('data', data => {
@@ -68,8 +79,13 @@
   }
 
   function join() {
+
+    
+    let connectTo = this.connectTo || otherId.value
+
+    console.log('connectTo', connectTo)
  
-    c_out = peer.connect(otherId.value, {reliable: true})
+    c_out = peer.connect(connectTo, {reliable: true})
 
     c_out.on('open', () => {
       status.innerHTML = 'connected to: ' + c_out.peer
@@ -107,11 +123,39 @@
     convo.innerText += `${strDate} - ${msgString}\n`
   }
 
+  function enableSelfSave() {
+    selfSave.style.display = 'block'
+  }
+
+  function reJoin() {
+    c_in  && c_in.close()
+    c_out && c_out.close()
+
+    peer  = null
+    c_in  = null
+    c_out = null
+
+    selfIdStr = selfId.value
+    selfSave.style.display = 'none'
+
+    initialize()
+
+  }
+
 
   connect.addEventListener('click', join)
 
   send.addEventListener('click', sendMsg)
 
+  selfId.addEventListener('input', enableSelfSave)
+
+  selfSave.addEventListener('click', reJoin)
+
 
   initialize()
 })()
+
+
+// @fixme cannot send emoji
+// index out of range
+// https://cdn.discordapp.com/attachments/1001550328719753237/1019047931636088892/unknown.png
