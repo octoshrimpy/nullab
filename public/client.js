@@ -16,6 +16,7 @@
   var convo    = document.getElementById('convo')
   var connect  = document.getElementById('connect')
   var selfSave = document.getElementById('selfSave')
+  var nextStep = document.getElementById('nextStep')
 
 
   function initialize() {
@@ -35,7 +36,7 @@
         lastPeerId = peer.id
       }
 
-      selfId.value = peer.id
+      selfId.innerText = peer.id
       console.log('peer ID:', peer.id)
 
       status.innerHTML = 'awaiting connection...'
@@ -46,7 +47,7 @@
       c_in = conn
 
       c_in.on('open', () => {
-        status.innerHTML = 'connected'
+        status.innerHTML = 'connected to ' + c_in.peer 
         comms.style.display = 'block'
 
         // connect right back
@@ -81,14 +82,14 @@
   function join() {
 
     
-    let connectTo = this.connectTo || otherId.value
+    let connectTo = this.connectTo || otherId.innerText
 
     console.log('connectTo', connectTo)
  
     c_out = peer.connect(connectTo, {reliable: true})
 
     c_out.on('open', () => {
-      status.innerHTML = 'connected to: ' + c_out.peer
+      status.innerHTML = 'connected to ' + c_out.peer
       console.log('connected to ' + c_out.peer)
     })
 
@@ -103,8 +104,8 @@
 
   function sendMsg () {
     if (c_out && c_out.open) {
-      let msgString = msg.value
-      msg.value = ''
+      let msgString = msg.innerText
+      msg.innerText = ''
       c_out.send(msgString)
       console.log(msgString + ' sent')
       addMessage(msgString)
@@ -135,10 +136,16 @@
     c_in  = null
     c_out = null
 
-    selfIdStr = selfId.value
+    selfIdStr = selfId.innerText
     selfSave.style.display = 'none'
 
     initialize()
+
+  }
+
+  function stepForward() {
+    let step = Number.parseInt(document.body.getAttribute('data-step'))
+    document.body.setAttribute('data-step', step + 1)
 
   }
 
@@ -150,6 +157,8 @@
   selfId.addEventListener('input', enableSelfSave)
 
   selfSave.addEventListener('click', reJoin)
+
+  nextStep.addEventListener('click', stepForward)
 
 
   initialize()

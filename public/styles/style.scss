@@ -1,0 +1,40 @@
+@use 'https://unpkg.com/@picocss/pico';
+
+body[data-step="1"] {
+
+  .other {
+    display: none;
+  }
+
+  #status {
+    display: none;
+  }
+  
+}
+body[data-step="2"] {
+  .self {
+    textarea {
+      border: none;
+      width: min-content;
+      height: min-content;
+    }
+  }
+}
+body[data-step="3"] {
+
+}
+
+[contenteditable="true"] {
+  --background-color: var(--form-element-background-color);
+  --border-color: var(--form-element-border-color);
+  --color: var(--form-element-color);
+  --box-shadow: none;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  outline: none;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
+  color: var(--color);
+  font-weight: var(--font-weight);
+
+}

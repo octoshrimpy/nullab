@@ -1,0 +1,17 @@
+@import url("https://unpkg.com/@picocss/pico");
+body[data-step="1"] .other {
+  display: none;
+}
+body[data-step="1"] #status {
+  display: none;
+}
+
+body[data-step="2"] .self textarea, body[data-step="2"] .self [contenteditable=true] {
+  border: none;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}/*# sourceMappingURL=style.css.map */

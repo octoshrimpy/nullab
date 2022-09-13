@@ -5,30 +5,37 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>nullab</title>
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico">
 
   <!-- <script defer src="simple-peer-wrapper.min.js"></script> -->
   <script src="https://unpkg.com/peerjs@1.3.2/dist/peerjs.min.js"></script>
   <script defer src="client.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
+<body data-step="1">
   <main class="container" id="connect-group">
-    <label for="selfId">your ID:</label>
-    <textarea name="selfId" id="selfId" rows="3"></textarea>
-
-    <button id="selfSave" style="display: none;">use ID</button>
-    
-    <label for="otherId">connect to:</label>
-    <textarea name="otherId" id="otherId" rows="3"></textarea>
-
-    <button id="connect"> connect</button>
+    <div class="self">
+      <label for="selfId">your ID:</label>
+      <div contenteditable="true" name="selfId" id="selfId"></div>
+  
+      <button id="selfSave" style="display: none;">use ID</button>
+    </div>
+    <div class="other">
+      <label for="otherId">connect to:</label>
+      <div contenteditable="true" name="otherId" id="otherId"></div>
+  
+      <button id="connect"> connect</button>
+    </div>
     <div id="status"></div>
   </main>
   <main class="container" id="comms-group" style="display: none;">
     <label for="msg"></label>
-    <textarea name="msg" id="msg" rows="4"></textarea>
+    <div contenteditable="true" name="msg" id="msg" rows="4"></div>
     <button id="send">send</button>
     <pre id="convo"></pre>
+  </main>
+  <main class="container">
+    <button id="nextStep">next</button>
   </main>
 </body>
 </html>
