@@ -1,4 +1,33 @@
-@use 'https://unpkg.com/@picocss/pico';
+@import url('https://unpkg.com/@picocss/pico');
+
+// fake textarea
+faux-text {
+  cursor: text;
+
+  --background-color: var(--form-element-background-color);
+  --border-color: var(--form-element-border-color);
+  --color: var(--form-element-color);
+  --box-shadow: none;
+
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  outline: none;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
+  color: var(--color);
+  font-weight: var(--font-weight);
+
+  padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
+  transition: background-color var(--transition),border-color var(--transition),color var(--transition),box-shadow var(--transition);
+  margin-bottom: var(--spacing);
+
+  &:active,
+  &:focus {
+    --border-color: var(--form-element-active-border-color);
+  }
+}
+
+
 
 body[data-step="1"] {
 
@@ -9,14 +38,45 @@ body[data-step="1"] {
   #status {
     display: none;
   }
+
+
+  [contenteditable="true"] {
+    @extend faux-text;
+  }
   
 }
 body[data-step="2"] {
   .self {
-    textarea {
-      border: none;
-      width: min-content;
-      height: min-content;
+    display: flex;
+    align-items: center;
+
+    label {
+      flex-grow: 1;
+    }
+    * {
+      white-space: nowrap;
+    }
+
+    [contenteditable] {
+      padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
+      border: var(--border-width) solid transparent;
+      padding-right: 0;
+      margin: 0;
+      transition: padding var(--transition);
+      
+      &:hover,
+      &:focus,
+      &:active {
+        transition: padding var(--transition);
+        margin: 0;
+        @extend faux-text;
+      }
+    }
+  }
+
+  .other  {
+    [contenteditable="true"] {
+      @extend faux-text;
     }
   }
 }
@@ -24,17 +84,7 @@ body[data-step="3"] {
 
 }
 
-[contenteditable="true"] {
-  --background-color: var(--form-element-background-color);
-  --border-color: var(--form-element-border-color);
-  --color: var(--form-element-color);
-  --box-shadow: none;
-  border: var(--border-width) solid var(--border-color);
-  border-radius: var(--border-radius);
-  outline: none;
-  background-color: var(--background-color);
-  box-shadow: var(--box-shadow);
-  color: var(--color);
-  font-weight: var(--font-weight);
-
+.self,
+.other {
+  margin-bottom: var(--spacing);
 }

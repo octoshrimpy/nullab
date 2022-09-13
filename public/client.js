@@ -39,7 +39,7 @@
       selfId.innerText = peer.id
       console.log('peer ID:', peer.id)
 
-      status.innerHTML = 'awaiting connection...'
+      status.innerHTML = 'awaiting connection'
     })
 
     // other client can send
@@ -74,6 +74,8 @@
     })
 
     peer.on('error', err => {
+
+      connect.setAttribute('aria-busy', false)
       console.log(err)
       alert('' + err)
     })    
@@ -81,16 +83,18 @@
 
   function join() {
 
+    status.innerHTML = 'attempting connection...'
+
+    connect.setAttribute('aria-busy', true)
     
     let connectTo = this.connectTo || otherId.innerText
-
-    console.log('connectTo', connectTo)
  
     c_out = peer.connect(connectTo, {reliable: true})
 
     c_out.on('open', () => {
       status.innerHTML = 'connected to ' + c_out.peer
       console.log('connected to ' + c_out.peer)
+      connect.setAttribute('aria-busy', false)
     })
 
     c_out.on('data', data => {

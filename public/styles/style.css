@@ -1,17 +1,53 @@
 @import url("https://unpkg.com/@picocss/pico");
+faux-text, body[data-step="2"] .other [contenteditable=true], body[data-step="2"] .self [contenteditable]:hover, body[data-step="2"] .self [contenteditable]:focus, body[data-step="2"] .self [contenteditable]:active, body[data-step="1"] [contenteditable=true] {
+  cursor: text;
+  --background-color: var(--form-element-background-color);
+  --border-color: var(--form-element-border-color);
+  --color: var(--form-element-color);
+  --box-shadow: none;
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  outline: none;
+  background-color: var(--background-color);
+  box-shadow: var(--box-shadow);
+  color: var(--color);
+  font-weight: var(--font-weight);
+  padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+  margin-bottom: var(--spacing);
+}
+faux-text:active, body[data-step="2"] .other [contenteditable=true]:active, body[data-step="2"] .self [contenteditable]:active, body[data-step="1"] [contenteditable=true]:active, faux-text:focus, body[data-step="2"] .other [contenteditable=true]:focus, body[data-step="2"] .self [contenteditable]:focus, body[data-step="1"] [contenteditable=true]:focus {
+  --border-color: var(--form-element-active-border-color);
+}
+
 body[data-step="1"] .other {
   display: none;
 }
 body[data-step="1"] #status {
   display: none;
 }
-
-body[data-step="2"] .self textarea, body[data-step="2"] .self [contenteditable=true] {
-  border: none;
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
+body[data-step="2"] .self {
+  display: flex;
+  align-items: center;
+}
+body[data-step="2"] .self label {
+  flex-grow: 1;
+}
+body[data-step="2"] .self * {
+  white-space: nowrap;
+}
+body[data-step="2"] .self [contenteditable] {
+  padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
+  border: var(--border-width) solid transparent;
+  padding-right: 0;
+  margin: 0;
+  transition: padding var(--transition);
+}
+body[data-step="2"] .self [contenteditable]:hover, body[data-step="2"] .self [contenteditable]:focus, body[data-step="2"] .self [contenteditable]:active {
+  transition: padding var(--transition);
+  margin: 0;
+}
+.self,
+.other {
+  margin-bottom: var(--spacing);
 }/*# sourceMappingURL=style.css.map */
