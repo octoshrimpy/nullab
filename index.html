@@ -12,20 +12,19 @@
 
   <link rel="stylesheet" href="styles/style.css">
 </head>
-<body data-step="1">
+<body>
   <main class="container" id="connect-group">
-    <div class="self">
+    <div id="selfbox">
       <label for="selfId">your ID:</label>
       <div contenteditable="true" spellcheck="false" name="selfId" id="selfId"></div>
   
       <button id="selfSave" style="display: none;">use ID</button>
     </div>
-    <div class="other">
+    <div id="otherbox">
       <label for="otherId">connect to:</label>
       <div contenteditable="true" spellcheck="false" name="otherId" id="otherId"></div>
-  
-      <button id="connect"> connect</button>
     </div>
+    <button id="connect"> connect</button>
     <div id="status"></div>
   </main>
   <main class="container" id="comms-group" style="display: none;">
@@ -35,7 +34,7 @@
     <pre id="convo"></pre>
   </main>
   <main class="container">
-    <button id="nextStep">next</button>
+    <!-- <button id="nextStep" display: none>next</button> -->
   </main>
 </body>
 </html>

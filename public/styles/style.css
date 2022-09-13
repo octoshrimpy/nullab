@@ -1,5 +1,9 @@
 @import url("https://unpkg.com/@picocss/pico");
-faux-text, body[data-step="2"] .other [contenteditable=true], body[data-step="2"] .self [contenteditable]:hover, body[data-step="2"] .self [contenteditable]:focus, body[data-step="2"] .self [contenteditable]:active, body[data-step="1"] [contenteditable=true] {
+faux-text, #comms-group [contenteditable=true], #selfbox.small [contenteditable]:hover, #selfbox.small [contenteditable]:focus, #selfbox.small [contenteditable]:active,
+#otherbox.small [contenteditable]:hover,
+#otherbox.small [contenteditable]:focus,
+#otherbox.small [contenteditable]:active, #selfbox [contenteditable=true],
+#otherbox [contenteditable=true] {
   cursor: text;
   --background-color: var(--form-element-background-color);
   --border-color: var(--form-element-border-color);
@@ -16,38 +20,43 @@ faux-text, body[data-step="2"] .other [contenteditable=true], body[data-step="2"
   transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
   margin-bottom: var(--spacing);
 }
-faux-text:active, body[data-step="2"] .other [contenteditable=true]:active, body[data-step="2"] .self [contenteditable]:active, body[data-step="1"] [contenteditable=true]:active, faux-text:focus, body[data-step="2"] .other [contenteditable=true]:focus, body[data-step="2"] .self [contenteditable]:focus, body[data-step="1"] [contenteditable=true]:focus {
+faux-text:active, #comms-group [contenteditable=true]:active, #selfbox.small [contenteditable]:active,
+#otherbox.small [contenteditable]:active, #selfbox [contenteditable=true]:active,
+#otherbox [contenteditable=true]:active, faux-text:focus, #comms-group [contenteditable=true]:focus, #selfbox.small [contenteditable]:focus,
+#otherbox.small [contenteditable]:focus, #selfbox [contenteditable=true]:focus,
+#otherbox [contenteditable=true]:focus {
   --border-color: var(--form-element-active-border-color);
 }
 
-body[data-step="1"] .other {
-  display: none;
+#selfbox,
+#otherbox {
+  margin-bottom: var(--spacing);
 }
-body[data-step="1"] #status {
-  display: none;
-}
-body[data-step="2"] .self {
+#selfbox.small,
+#otherbox.small {
   display: flex;
   align-items: center;
 }
-body[data-step="2"] .self label {
+#selfbox.small label,
+#otherbox.small label {
   flex-grow: 1;
 }
-body[data-step="2"] .self * {
+#selfbox.small *,
+#otherbox.small * {
   white-space: nowrap;
 }
-body[data-step="2"] .self [contenteditable] {
+#selfbox.small [contenteditable],
+#otherbox.small [contenteditable] {
   padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
   border: var(--border-width) solid transparent;
   padding-right: 0;
   margin: 0;
   transition: padding var(--transition);
 }
-body[data-step="2"] .self [contenteditable]:hover, body[data-step="2"] .self [contenteditable]:focus, body[data-step="2"] .self [contenteditable]:active {
+#selfbox.small [contenteditable]:hover, #selfbox.small [contenteditable]:focus, #selfbox.small [contenteditable]:active,
+#otherbox.small [contenteditable]:hover,
+#otherbox.small [contenteditable]:focus,
+#otherbox.small [contenteditable]:active {
   transition: padding var(--transition);
   margin: 0;
-}
-.self,
-.other {
-  margin-bottom: var(--spacing);
 }/*# sourceMappingURL=style.css.map */

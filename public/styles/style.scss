@@ -29,24 +29,17 @@ faux-text {
 
 
 
-body[data-step="1"] {
 
-  .other {
-    display: none;
-  }
-
-  #status {
-    display: none;
-  }
-
+#selfbox,
+#otherbox {
+  margin-bottom: var(--spacing);
 
   [contenteditable="true"] {
     @extend faux-text;
   }
   
-}
-body[data-step="2"] {
-  .self {
+
+  &.small {
     display: flex;
     align-items: center;
 
@@ -56,6 +49,7 @@ body[data-step="2"] {
     * {
       white-space: nowrap;
     }
+
 
     [contenteditable] {
       padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
@@ -73,18 +67,11 @@ body[data-step="2"] {
       }
     }
   }
+}
 
-  .other  {
-    [contenteditable="true"] {
-      @extend faux-text;
-    }
+
+#comms-group {
+  [contenteditable="true"] {
+    @extend faux-text;
   }
-}
-body[data-step="3"] {
-
-}
-
-.self,
-.other {
-  margin-bottom: var(--spacing);
 }

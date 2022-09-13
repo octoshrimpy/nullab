@@ -16,8 +16,10 @@
   var convo    = document.getElementById('convo')
   var connect  = document.getElementById('connect')
   var selfSave = document.getElementById('selfSave')
+  var self     = document.getElementById('selfbox')
+  var other    = document.getElementById('otherbox')
+  
   var nextStep = document.getElementById('nextStep')
-
 
   function initialize() {
     peer = new Peer(selfIdStr, {
@@ -28,7 +30,6 @@
     })
     
     peer.on('open', (id) => {
-      console.log(peer)
       if (peer.id === null) {
         console.log('received null id from peer open')
         peer.id = lastPeerId
@@ -37,7 +38,6 @@
       }
 
       selfId.innerText = peer.id
-      console.log('peer ID:', peer.id)
 
       status.innerHTML = 'awaiting connection'
     })
@@ -59,7 +59,7 @@
       })
 
       c_in.on('data', data => {
-        addMessage(data)
+        addMessage(`${c_in.peer}: ${data}`)
       })
     })
 
@@ -83,14 +83,17 @@
 
   function join() {
 
+    self.classList.add('small')
+    other.classList.add('small')
+
     status.innerHTML = 'attempting connection...'
 
+    
     connect.setAttribute('aria-busy', true)
     
     let connectTo = this.connectTo || otherId.innerText
- 
+    
     c_out = peer.connect(connectTo, {reliable: true})
-
     c_out.on('open', () => {
       status.innerHTML = 'connected to ' + c_out.peer
       console.log('connected to ' + c_out.peer)
@@ -98,7 +101,7 @@
     })
 
     c_out.on('data', data => {
-      addMessage(data)
+      console.log("c_out", c_out)
     })
 
     c_out.on('close', () => {
@@ -112,13 +115,14 @@
       msg.innerText = ''
       c_out.send(msgString)
       console.log(msgString + ' sent')
-      addMessage(msgString)
+      addMessage(`${peer.id}: ${msgString}`)
     } else {
       console.log('connection is closed')
     }
   }
 
   function addMessage(msgString) {
+
     var today = new Date()
 
     var strDate = 'h:m'
@@ -162,7 +166,7 @@
 
   selfSave.addEventListener('click', reJoin)
 
-  nextStep.addEventListener('click', stepForward)
+  // nextStep.addEventListener('click', stepForward)
 
 
   initialize()
