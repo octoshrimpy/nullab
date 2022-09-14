@@ -151,16 +151,10 @@
 
   }
 
-  function stepForward() {
-    let step = Number.parseInt(document.body.getAttribute('data-step'))
-    document.body.setAttribute('data-step', step + 1)
-
-  }
-
 
   connect.addEventListener('click', join)
 
-  send.addEventListener('click', sendMsg)
+  // send.addEventListener('click', sendMsg)
 
   selfId.addEventListener('input', enableSelfSave)
 
@@ -171,6 +165,13 @@
 
   initialize()
 })()
+
+
+
+function handleRemoteKeyCode(code) {
+  
+}
+
 
 
 // @fixme cannot send emoji

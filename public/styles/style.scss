@@ -74,4 +74,8 @@ faux-text {
   [contenteditable="true"] {
     @extend faux-text;
   }
+
+  #msg {
+    height: 20rem;
+  }
 }
